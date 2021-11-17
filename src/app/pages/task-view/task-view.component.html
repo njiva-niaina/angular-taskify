@@ -1,0 +1,103 @@
+<div class="flex flex-no-wrap">
+  <div style="min-height: 716px"
+    class="w-64 absolute sm:relative shadow md:h-full flex-col justify-between hidden sm:flex">
+    <div class="px-8">
+      <ul class="mt-12">
+        <li class="flex w-full justify-between text-gray-500 hover:text-gray-500 cursor-pointer items-center mb-6" *ngFor="let project of projects" [routerLink]="['/projects', project._id]" routerLinkActive="text-gray-300">
+          <div class="flex items-center">
+            <span class="text-sm ml-2">{{ project.title }}</span>
+          </div>
+        </li>
+        <li class="flex w-full justify-between text-gray-500 hover:text-gray-400 cursor-pointer items-center mb-6">
+          <div class="flex items-center">
+            <span class="text-sm ml-2">Products</span>
+          </div>
+        </li>
+      </ul>
+      <div class="flex justify-center mt-10 w-full">
+        <div class="relative">
+          <button class="btn btn-primary" routerLink="/new-project">New project</button> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider divider-vertical"></div> 
+  <div class="container py-10 h-64 md:w-4/5 px-6">
+    <div class="sm:px-6 w-full">
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th></th> 
+              <th>Name</th> 
+              <th>Description</th> 
+              <th>Duration</th> 
+              <th></th>
+              <th><button class="btn btn-primary">Add task</button> </th>
+            </tr>
+          </thead> 
+          <tbody>
+            <tr *ngFor="let task for tasks">
+              <th>
+                <label>
+                  <input type="checkbox" class="checkbox" (click)="onTaskClick(task)">
+                </label>
+              </th> 
+              <td>
+                <div class="flex items-center space-x-3">
+                  <div>
+                    <div class="font-bold">
+                      {{ task.title }}
+                    </div> 
+                  </div>
+                </div>
+              </td> 
+              <td>
+                {{ task.description }}
+                <br> 
+              </td> 
+              <td>{{ task.duration }}</td> 
+              <th>
+                <button class="btn btn-ghost btn-xs" [routerLink]="['/lists', selectedProjectId, 'edit-task', task._id]">Update</button>
+              </th>
+              <th>
+                <button class="btn btn-ghost btn-xs" (click)="onDeleteTaskClick(task._id)">Delete</button>
+              </th>
+            </tr>
+            <h2 *ngIf="tasks.length === 0">There are no tasks here! Click the add button to create a new task.</h2>
+            <div *ngIf="!tasks">
+              <h2>Please select a list from the sidebar</h2>
+            </div>
+            <tr>
+              <th>
+                <label>
+                  <input type="checkbox" class="checkbox">
+                </label>
+              </th> 
+              <td>
+                <div class="flex items-center space-x-3">
+                  <div>
+                    <div class="font-bold">
+                      Hart Hagerty
+                    </div> 
+                  </div>
+                </div>
+              </td> 
+              <td>
+                Zemlak, Daniel and Leannon
+                <br> 
+              </td> 
+              <td>10</td> 
+              <th>
+                <button class="btn btn-ghost btn-xs">Update</button>
+              </th>
+              <th>
+                <button class="btn btn-ghost btn-xs">Delete</button>
+              </th>
+            </tr>
+          </tbody> 
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
