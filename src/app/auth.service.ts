@@ -49,7 +49,7 @@ export class AuthService {
     return localStorage.getItem('user-id');
   }
 
-  setAccessToken(accessToken: string) {
+  setAccessToken(accessToken: any) {
     localStorage.setItem('x-access-token', accessToken)
   }
 
@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   getNewAccessToken() {
-    return this.http.get(`${this.webService.ROOT_URL}/users/me/access-token`, {
+    return this.http.get(`${this.webService.ROOT_URL}/me/access-token`, {
       headers: {
         'x-refresh-token': this.getRefreshToken(),
         '_id': this.getUserId()
